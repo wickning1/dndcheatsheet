@@ -1,0 +1,15 @@
+version: '3'
+services:
+  dndcheatsheet:
+    build: .
+    container_name: dndcheatsheet
+    environment:
+      NODE_ENV: development
+      HOST: 0.0.0.0
+      PORT: 80
+    ports:
+      - 80:80
+      - 35729:35729
+    volumes:
+      - ./src:/usr/app/src
+      - ./public:/usr/app/public

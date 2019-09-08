@@ -1,0 +1,151 @@
+{
+  "name": "Mike",
+  "class": "Paladin",
+  "alignment": "Lawful Good",
+  "proficiency": 2,
+  "abilities": {
+    "str": 3,
+    "dex": 0,
+    "con": 2,
+    "int": 0,
+    "wis": 0,
+    "cha": 3
+  },
+  "skills": {
+    "proficient": [
+      "athletics", "history", "intimidation",
+      "investigation", "perception", "persuasion"
+    ],
+    "description": {
+      "stealth": "disadvantage, armor"
+    }
+  },
+  "actions": [
+    {
+      "name": "Morningstar (piercing)",
+      "tohit": {
+        "ability": "str",
+        "proficient": 1.0,
+        "bonus": 0
+      },
+      "damage": {
+        "die": ["d8"],
+        "bonus": 0,
+        "ability": "str"
+      }
+    },
+    {
+      "name": "Morningstar (Sacred)",
+      "tohit": {
+        "ability": "str",
+        "proficient": 1.0,
+        "bonus": 3
+      },
+      "damage": {
+        "die": ["d8"],
+        "bonus": 0,
+        "ability": "str"
+      }
+    },
+    {
+      "name": "Javelin",
+      "tohit": {
+        "ability": "str",
+        "proficient": 1.0
+      },
+      "damage": {
+        "die": ["d6"],
+        "ability": "str"
+      }
+    },
+    {
+      "name": "Sacred Weapon (Channel Divinity)",
+      "description": "Imbue weapon with energy for 10 rounds. Weapon considered magical, emits 20ft bright light, +3 to attack rolls. Ends if dropped or unconscious."
+    },
+    {
+      "name": "Lay on Hands",
+      "description": "Touch to heal. You have 15HP per long rest to give to allies. Cure 1 poison/disease for 5HP.",
+      "damage": {
+        "die": ["15"]
+      }
+    },
+    {
+      "name": "Cure Wounds (1st level)",
+      "description": "Touch ally to restore health.",
+      "damage": {
+        "die": ["d8"],
+        "ability": "cha"
+      }
+    },
+    {
+      "name": "Bless (C) (1st level)",
+      "description": "Three allies within 30ft get +d4 on attack rolls and saving throws for 10 rounds."
+    },
+    {
+      "name": "Command (1st level)",
+      "description": "Give someone a one word command. They must save or obey on their next turn.",
+      "dc": {
+        "ability": "cha",
+        "target": "wis"
+      }
+    },
+    {
+      "name": "Turn Undead (Channel Divinity)",
+      "description": "Undead must succeed save or do nothing but run from you for 10 rounds or until damaged.",
+      "dc": {
+        "ability": "cha",
+        "target": "wis"
+      }
+    },
+    {
+      "name": "Protection from Good and Evil (C) (1st level)",
+      "description": "Touch ally to protect them from aberrations, celestials, elementals, fey, fiends, and undead for 10 minutes."
+    }
+  ],
+  "bonusactions": [
+    {
+      "name": "Sanctuary (1st level)",
+      "description": "Choose an ally. Attackers must make saving throw or target someone else.",
+      "dc": {
+        "ability": "cha",
+        "target": "wis"
+      }
+    },
+    {
+      "name": "Shield of Faith (C) (1st level)",
+      "description": "Ally within 60ft gains +2 AC for 10 minutes.",
+      "dc": {
+        "ability": "cha",
+        "target": "wis"
+      }
+    }
+  ],
+  "reactions": [
+
+  ],
+  "triggered": [
+    {
+      "name": "Divine Smite (1st level)",
+      "description": "When you hit with a melee attack, deal extra radiant damage. Extra 1d8 vs fiend/undead.",
+      "damage": {
+        "die": ["2d8"]
+      }
+    }
+  ],
+  "defenses": {
+    "hp": 28,
+    "ac": 20,
+    "saves": ["wis", "cha"],
+    "special": [
+      {
+        "name": "Immunity: Disease"
+      },
+      {
+        "name": "Immunity: Sleep"
+      },
+      {
+        "name": "Resistance: Charmed"
+      }
+    ]
+  }
+}

@@ -1,0 +1,82 @@
+<script>
+	import ActionList from './ActionList.svelte'
+	import SkillList from './SkillList.svelte'
+	import Character from './lib/character.js'
+	import Defenses from './Defenses.svelte'
+	import jsyaml from 'js-yaml'
+	const params = new URLSearchParams(window.location.search)
+	const charname = params.get('c')
+	const novice = params.has('novice')
+	const yml = params.has('yml') || params.has('yaml')
+	let characterdata = undefined
+	if (yml) {
+		fetch(`/data/${charname}.yaml`).then(resp => resp.text()).then(text => {
+			const data = jsyaml.safeLoad(text)
+			characterdata = new Character(data, novice)
+		})
+	} else {
+		fetch(`/data/${charname}.json`).then(resp => resp.json()).then(data => {
+			characterdata = new Character(data, novice)
+		})
+	}
+</script>
+
+<style>
+	h1 {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+	h1 .name {
+		color: var(--purple);
+	}
+	h1 .alignment {
+		font-size: 0.8em;
+		color: var(--darkgray);
+	}
+	h1 .class {
+		font-size: 0.8em;
+		color: var(--darkgray);
+	}
+	.column-container {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		align-items: stretch;
+	}
+	.column {
+		width: 49%;
+	}
+</style>
+
+{#if !charname}
+	No character file specified.
+{:else if !characterdata}
+	Loading...
+{:else}
+	<h1><span class="name">{characterdata.name}</span><span class="alignment">{characterdata.alignment || ''}</span><span class="class">{characterdata.class}</span></h1>
+	<h2>Actions</h2>
+	<div class="column-container">
+		<div class="column">
+			<ActionList title="Actions" actions={characterdata.actions}/>
+		</div>
+		<div class="column">
+			<ActionList title="Basic Actions" actions={characterdata.basicactions}/>
+			<ActionList title="Bonus Actions" actions={characterdata.bonusactions}/>
+			<ActionList title="Reactions" actions={characterdata.reactions}/>
+			<ActionList title="Triggers" actions={characterdata.triggered}/>
+		</div>
+	</div>
+	<div class="column-container">
+		<div class="skills column">
+			<h2>Skills</h2>
+			<SkillList title="Dungeon" skills={characterdata.computedskills.filter(s => s.type === 'key')} />
+			<SkillList title="Conversation" skills={characterdata.computedskills.filter(s => s.type === 'conversation')} />
+			<SkillList title="Skilled" skills={characterdata.computedskills.filter(s => !s.type && s.bonus > 1)} />
+		</div>
+		<div class="defenses column">
+			<h2>Defenses</h2>
+			<Defenses defenses={characterdata.defenses} />
+		</div>
+	</div>
+{/if}

@@ -1,0 +1,80 @@
+:root {
+	--red: #3f000a;
+	--blue: #04151f;
+	--purple: #540d6e;
+	--beige: #eee2df;
+	--darkgray: #333333;
+	--lightgray: #cccccc;
+}
+
+body {
+	line-height: 1.4;
+	font-size: 14px;
+}
+
+main {
+	max-width: 1000px;
+	margin: 0 auto;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+table {
+	border-collapse: collapse;
+	width: 100%;
+	margin-bottom: 8px;
+	border: 1px solid var(--lightgray);
+}
+thead tr {
+	background-color: var(--red);
+	color: white;
+}
+tr.even { background-color: var(--beige); }
+tr.description td {
+	font-size: 0.8em;
+	padding-left: 1em;
+	padding-top: 0;
+}
+th, td {
+	text-align: left;
+	font-size: 0.9em;
+	padding: 0.3em 0.5em;
+	text-align: center;
+}
+th:last-child, td:last-child {
+	text-align: right;
+}
+th:first-child, td:first-child {
+	text-align: left;
+}
+td .description {
+	font-size: 0.8em;
+	padding-left: 1em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	margin: 0 0 0.5em 0;
+}
+
+h1 {
+	font-size: 20px;
+}
+
+h2 {
+	font-size: 18px;
+}
+
+h3 {
+	font-size: 16px;
+}
+
+h4 {
+	font-size: 15px;
+}
+
+h5 {
+	font-size: 14px;
+}
+
+h6 {
+	font-size: 14px;
+}
