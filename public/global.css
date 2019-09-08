@@ -2,7 +2,7 @@
 	--red: #3f000a;
 	--blue: #04151f;
 	--purple: #540d6e;
-	--beige: #eee2df;
+	--beige: #ece2df;
 	--darkgray: #333333;
 	--lightgray: #cccccc;
 }
@@ -45,6 +45,13 @@ th:last-child, td:last-child {
 }
 th:first-child, td:first-child {
 	text-align: left;
+}
+td.key {
+	text-align: left;
+}
+td.value {
+	border-right: 1px solid var(--lightgray);
+	text-align: right;
 }
 td .description {
 	font-size: 0.8em;

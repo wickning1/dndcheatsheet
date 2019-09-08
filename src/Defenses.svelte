@@ -12,18 +12,14 @@
 <style>
   .key {
     width: 40%;
-    text-align: left;
   }
   .value {
     width: 10%;
-    border-right: 1px solid var(--lightgray);
-    text-align: right;
   }
   .defenses-special td {
     width: 50%;
-  }
-  .defenses-special td:last-child {
     text-align: left;
+    border-right: 1px solid var(--lightgray);
   }
 </style>
 

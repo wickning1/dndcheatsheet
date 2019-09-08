@@ -10,6 +10,7 @@ export default class Character {
     this.bonusactions = this.bonusactions || []
     this.reactions = this.reactions || []
     this.triggered = this.triggered || []
+    this.ritual = this.ritual || []
     this.computedskills = new Skills(this).skills
     if (novice) {
       this.basicactions.push({
@@ -52,6 +53,7 @@ export default class Character {
     for (const action of this.bonusactions) this.processaction(action)
     for (const action of this.reactions) this.processaction(action)
     for (const action of this.triggered) this.processaction(action)
+    for (const action of this.ritual) this.processaction(action)
     this.defenses.computedsaves = this.processsaves()
   }
 

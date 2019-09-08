@@ -3,12 +3,24 @@
   export let even = false
 </script>
 
+<style>
+  .dc {
+    width: 15%;
+  }
+  .tohit {
+    width: 10%;
+  }
+  .damage {
+    width: 20%;
+  }
+</style>
+
 <tr class="action-item" class:even>
   <td class="name">{action.name}</td>
   <td class="tohit">
     {#if action.tohit}{action.tohit}{:else}&nbsp;{/if}
   </td>
-  <td>
+  <td class="dc">
     {#if action.dc}{action.dc}{:else}&nbsp;{/if}
   </td>
   <td class="damage">

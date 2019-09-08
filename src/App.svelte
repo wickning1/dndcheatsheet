@@ -3,22 +3,19 @@
 	import SkillList from './SkillList.svelte'
 	import Character from './lib/character.js'
 	import Defenses from './Defenses.svelte'
+	import TrackerList from './TrackerList.svelte'
 	import jsyaml from 'js-yaml'
 	const params = new URLSearchParams(window.location.search)
 	const charname = params.get('c')
 	const novice = params.has('novice')
-	const yml = params.has('yml') || params.has('yaml')
 	let characterdata = undefined
-	if (yml) {
-		fetch(`/data/${charname}.yaml`).then(resp => resp.text()).then(text => {
-			const data = jsyaml.safeLoad(text)
-			characterdata = new Character(data, novice)
-		})
-	} else {
-		fetch(`/data/${charname}.json`).then(resp => resp.json()).then(data => {
-			characterdata = new Character(data, novice)
-		})
-	}
+	fetch(`/data/${charname}.yaml`).then(resp => resp.text()).then(text => {
+		const data = jsyaml.safeLoad(text)
+		characterdata = new Character(data, novice)
+	}).catch(e => console.log(e))
+	fetch(`/data/${charname}.json`).then(resp => resp.json()).then(data => {
+		characterdata = new Character(data, novice)
+	}).catch(e => console.log(e))
 </script>
 
 <style>
@@ -64,9 +61,13 @@
 			<ActionList title="Basic Actions" actions={characterdata.basicactions}/>
 			<ActionList title="Bonus Actions" actions={characterdata.bonusactions}/>
 			<ActionList title="Reactions" actions={characterdata.reactions}/>
+			<ActionList title="Rituals" actions={characterdata.ritual}/>
 			<ActionList title="Triggers" actions={characterdata.triggered}/>
 		</div>
 	</div>
+	{#if characterdata.trackers && characterdata.trackers.length}
+		<TrackerList title="Limited Uses" trackers={characterdata.trackers} />
+	{/if}
 	<div class="column-container">
 		<div class="skills column">
 			<h2>Skills</h2>
