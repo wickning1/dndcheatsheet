@@ -118,6 +118,17 @@ export default class Skills {
         })
       }
     }
+    if (character.skills.tools) {
+      for (const tool of character.skills.tools) {
+        this.skills.push({
+          name: tool.name,
+          description: tool.description,
+          proficient: true,
+          type: 'key',
+          bonus: character.processmodifier(tool)
+        })
+      }
+    }
   }
 
   getbonus (skill) {

@@ -4,6 +4,7 @@
 	import Character from './lib/character.js'
 	import Defenses from './Defenses.svelte'
 	import TrackerList from './TrackerList.svelte'
+	import { CardLayout, Card } from 'simple-svelte-components'
 	import jsyaml from 'js-yaml'
 	const params = new URLSearchParams(window.location.search)
 	const charname = params.get('c')
@@ -21,6 +22,7 @@
 <style>
 	h1 {
 		display: flex;
+		flex-wrap: wrap;
 		justify-content: space-between;
 		align-items: center;
 	}
@@ -35,15 +37,6 @@
 		font-size: 0.8em;
 		color: var(--darkgray);
 	}
-	.column-container {
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: space-between;
-		align-items: stretch;
-	}
-	.column {
-		width: 49%;
-	}
 </style>
 
 {#if !charname}
@@ -53,31 +46,27 @@
 {:else}
 	<h1><span class="name">{characterdata.name}</span><span class="alignment">{characterdata.alignment || ''}</span><span class="class">{characterdata.class}</span></h1>
 	<h2>Actions</h2>
-	<div class="column-container">
-		<div class="column">
-			<ActionList title="Actions" actions={characterdata.actions}/>
-		</div>
-		<div class="column">
-			<ActionList title="Basic Actions" actions={characterdata.basicactions}/>
-			<ActionList title="Bonus Actions" actions={characterdata.bonusactions}/>
-			<ActionList title="Reactions" actions={characterdata.reactions}/>
-			<ActionList title="Rituals" actions={characterdata.ritual}/>
-			<ActionList title="Triggers" actions={characterdata.triggered}/>
-		</div>
-	</div>
+	<CardLayout maxwidth={700} preserveorder>
+		<ActionList title="Actions" actions={characterdata.actions}/>
+		<ActionList title="Basic Actions" actions={characterdata.basicactions}/>
+		<ActionList title="Bonus Actions" actions={characterdata.bonusactions}/>
+		<ActionList title="Reactions" actions={characterdata.reactions}/>
+		<ActionList title="Rituals" actions={characterdata.ritual}/>
+		<ActionList title="Special / Triggered" actions={characterdata.triggered}/>
+	</CardLayout>
 	{#if characterdata.trackers && characterdata.trackers.length}
 		<TrackerList title="Limited Uses" trackers={characterdata.trackers} />
 	{/if}
-	<div class="column-container">
-		<div class="skills column">
+	<CardLayout maxwidth={700}>
+		<Card>
 			<h2>Skills</h2>
 			<SkillList title="Dungeon" skills={characterdata.computedskills.filter(s => s.type === 'key')} />
 			<SkillList title="Conversation" skills={characterdata.computedskills.filter(s => s.type === 'conversation')} />
 			<SkillList title="Skilled" skills={characterdata.computedskills.filter(s => !s.type && s.bonus > 1)} />
-		</div>
-		<div class="defenses column">
+		</Card>
+		<Card>
 			<h2>Defenses</h2>
 			<Defenses defenses={characterdata.defenses} />
-		</div>
-	</div>
+		</Card>
+	</CardLayout>
 {/if}
