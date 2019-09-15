@@ -48,10 +48,12 @@
 	<h2>Actions</h2>
 	<CardLayout maxwidth={700} preserveorder>
 		<ActionList title="Actions" actions={characterdata.actions}/>
+		<ActionList title="Actions (offensive)" actions={characterdata.offensiveactions}/>
+		<ActionList title="Actions (defensive)" actions={characterdata.defensiveactions}/>
 		<ActionList title="Basic Actions" actions={characterdata.basicactions}/>
 		<ActionList title="Bonus Actions" actions={characterdata.bonusactions}/>
 		<ActionList title="Reactions" actions={characterdata.reactions}/>
-		<ActionList title="Rituals" actions={characterdata.ritual}/>
+		<ActionList title="Non-Combat" actions={characterdata.ritual}/>
 		<ActionList title="Special / Triggered" actions={characterdata.triggered}/>
 	</CardLayout>
 	{#if characterdata.trackers && characterdata.trackers.length}

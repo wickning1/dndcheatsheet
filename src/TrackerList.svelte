@@ -48,7 +48,7 @@
   }
   @media screen and (min-width: 600px) and (max-width: 799px) {
     .tracker-item {
-      width: 33%;
+      width: 33.3333%;
     }
     .tracker-item:nth-child(1), .tracker-item:nth-child(2), .tracker-item:nth-child(3) {
       border-top: 1px solid var(--lightgray);
@@ -66,7 +66,7 @@
     .tracker-item:nth-child(1), .tracker-item:nth-child(2), .tracker-item:nth-child(3), .tracker-item:nth-child(4) {
       border-top: 1px solid var(--lightgray);
       flex-grow: 1;
-      max-width: 33%;
+      max-width: 33.3333%;
     }
     .tracker-item:nth-child(8n+2), .tracker-item:nth-child(8n+4), .tracker-item:nth-child(8n+5), .tracker-item:nth-child(8n+7) {
       background-color: var(--beige);

@@ -6,6 +6,8 @@ export default class Character {
       this[key] = val
     }
     this.actions = this.actions || []
+    this.offensiveactions = this.offensiveactions || []
+    this.defensiveactions = this.defensiveactions || []
     this.basicactions = this.basicactions || []
     this.bonusactions = this.bonusactions || []
     this.reactions = this.reactions || []
@@ -49,6 +51,8 @@ export default class Character {
       })
     }
     for (const action of this.actions) this.processaction(action)
+    for (const action of this.offensiveactions) this.processaction(action)
+    for (const action of this.defensiveactions) this.processaction(action)
     for (const action of this.basicactions) this.processaction(action)
     for (const action of this.bonusactions) this.processaction(action)
     for (const action of this.reactions) this.processaction(action)
@@ -90,7 +94,8 @@ export default class Character {
 
   processdc (info) {
     let modifier = 8
-    modifier += this.proficiency
+    const proficient = typeof info.proficient === 'undefined' ? 1 : info.proficient
+    modifier += this.proficiency * proficient
     if (info.ability) modifier += this.abilities[info.ability]
     if (info.bonus) modifier += info.bonus
 
@@ -103,6 +108,7 @@ export default class Character {
     for (const stat of stats) {
       ret[stat] = this.abilities[stat]
       if (this.defenses.saves.includes(stat)) ret[stat] += this.proficiency
+      if (this.defenses.savebonus) ret[stat] += this.defenses.savebonus
       ret[stat] = (ret[stat] >= 0 ? '+' : '') + ret[stat]
     }
     return ret

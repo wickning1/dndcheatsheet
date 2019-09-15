@@ -11,7 +11,7 @@
     width: 10%;
   }
   .damage {
-    width: 20%;
+    width: 18%;
   }
 </style>
 
