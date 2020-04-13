@@ -74,12 +74,19 @@
   }
 </style>
 
-<h2>Limited Uses</h2>
+<h2>{title}</h2>
 <div class="tracker-list">
   {#each trackers as tracker,idx}
     <div class="tracker-item">
       <span class="key">{#if tracker}{tracker.name}{:else}&nbsp;{/if}</span>
-      <span class="value">{#if tracker}{tracker.value}/{tracker.refresh}{:else}&nbsp;{/if}</span>
+      <span class="value">
+        {#if !tracker}
+          &nbsp;
+        {:else if tracker.recharge}
+          {tracker.recharge}/{tracker.rechargetrigger} <span style="white-space: nowrap">(max: {tracker.value})</span>
+        {:else}
+          {tracker.value}/{tracker.refresh}
+        {/if}</span>
     </div>
   {/each}
 </div>

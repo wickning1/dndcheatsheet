@@ -28,7 +28,7 @@
   <tbody>
     <tr>
       <td class="key">Health (HP)</td><td class="value">{defenses.hp}</td>
-      <td class="key">Armor Class (AC)</td><td class="value">{defenses.ac}</td>
+      <td class="key">Armor Class (AC)</td><td class="value">{defenses.computedac}</td>
     </tr>
   </tbody>
 </table>

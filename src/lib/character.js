@@ -59,6 +59,7 @@ export default class Character {
     for (const action of this.triggered) this.processaction(action)
     for (const action of this.ritual) this.processaction(action)
     this.defenses.computedsaves = this.processsaves()
+    this.defenses.computedac = this.processac()
   }
 
   processaction (action) {
@@ -72,12 +73,17 @@ export default class Character {
     return action
   }
 
-  processmodifier (info) {
+  computemodifier (info) {
     let modifier = 0
     if (info.proficient > 0) modifier += Math.floor(this.proficiency * info.proficient)
     if (info.ability) modifier += parseInt(this.abilities[info.ability])
+    if (info.abilities) modifier += info.abilities.reduce((sum, key) => this.abilities[key] + sum, 0)
     if (info.bonus) modifier += parseInt(info.bonus)
+    return modifier
+  }
 
+  processmodifier (info) {
+    const modifier = this.computemodifier(info)
     return (modifier >= 0 ? '+' : '') + modifier
   }
 
@@ -112,5 +118,10 @@ export default class Character {
       ret[stat] = (ret[stat] >= 0 ? '+' : '') + ret[stat]
     }
     return ret
+  }
+
+  processac () {
+    if (typeof this.defenses.ac === 'number') return this.defenses.ac
+    return this.computemodifier(this.defenses.ac) + 10
   }
 }
